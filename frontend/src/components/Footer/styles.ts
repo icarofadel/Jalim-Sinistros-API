@@ -2,8 +2,8 @@ import styled from 'styled-components'
 import { cores } from '../../styles'
 
 export const Container = styled.footer`
-  background-color: #000;
-  color: ${cores.color};
+  background-color: ${cores.sidebar};
+  color: ${cores.colorPrimaria};
   padding: 32px;
   width: 100%;
 

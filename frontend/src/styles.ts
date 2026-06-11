@@ -1,8 +1,13 @@
 import { createGlobalStyle, styled } from 'styled-components'
 
 export const cores = {
+  fundoPrincipal: '#F8FAFC',
+  sidebar: '#0F172A',
   white: '#fff',
-  color: 'rgba(40, 168, 225)'
+  colorPrimaria: '#2563EB',
+  corSecundária: '#64748B',
+  sucesso: '#16A34A',
+  exclusao: '#DC2626'
 }
 
 export const breakponints = {
@@ -26,7 +31,7 @@ export const GlobalCss = createGlobalStyle`
   }
 
   .fundo{
-    background-color: #3c3c3c;
+    background-color: ${cores.fundoPrincipal};
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -40,11 +45,11 @@ export const GlobalCss = createGlobalStyle`
   }
 `
 export const CampoForm = styled.div`
-  color: #fff;
+  color: ${cores.colorPrimaria};
 `
 
 export const Title = styled.h3`
-  color: ${cores.color};
+  color: ${cores.colorPrimaria};
   padding: 8px;
   font-size: 24px;
   font-weight: bold;
@@ -52,7 +57,7 @@ export const Title = styled.h3`
   justify-content: center;
 `
 export const TitleSecundario = styled.span`
-  color: ${cores.color};
+  color: ${cores.corSecundária};
   margin: 32px 0;
   font-weight: bold;
 `

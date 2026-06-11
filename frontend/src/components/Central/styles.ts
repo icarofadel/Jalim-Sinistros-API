@@ -8,7 +8,7 @@ export const HomeSection = styled.section`
 
   h2,
   h3 {
-    color: ${cores.color};
+    color: ${cores.colorPrimaria};
     padding: 8px;
     display: flex;
     justify-content: center;

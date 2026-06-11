@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { cores } from '../../styles'
 
 export const ModalWrapper = styled.div`
   position: fixed;
@@ -6,14 +7,14 @@ export const ModalWrapper = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: ${cores.fundoPrincipal};
   display: flex;
   justify-content: center;
   align-items: center;
 `
 
 export const ModalContent = styled.div`
-  background: #2b2b2b;
+  background: ${cores.fundoPrincipal};
   padding: 20px;
   border-radius: 8px;
   min-width: 300px;
@@ -21,7 +22,7 @@ export const ModalContent = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px; /* Espaço entre os elementos */
-  color: #eaeaea;
+  color: ${cores.colorPrimaria};
 `
 
 export const Input = styled.input`
@@ -64,7 +65,7 @@ export const Table = styled.table`
   thead th {
     position: sticky;
     top: 0;
-    background: #222;
+    background: ${cores.fundoPrincipal};
     padding: 8px;
     font-weight: 600;
     text-align: left;
@@ -93,8 +94,8 @@ export const PaginationRow = styled.div`
 `
 
 export const PageButton = styled.button`
-  background: #2e8bf2;
-  color: #fff;
+  background: ${cores.colorPrimaria};
+  color: ${cores.white};
   border: none;
   padding: 6px 10px;
   border-radius: 4px;

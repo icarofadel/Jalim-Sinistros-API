@@ -2,8 +2,8 @@ import styled from 'styled-components'
 import { breakponints, cores } from '../../styles'
 
 export const HeaderBar = styled.header`
-  background-color: #000;
-  color: ${cores.color};
+  background-color: ${cores.sidebar};
+  color: ${cores.colorPrimaria};
   display: flex;
   align-items: center;
   justify-content: space-between;

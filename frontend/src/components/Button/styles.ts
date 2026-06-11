@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { cores } from '../../styles'
 
 export const Buttons = styled.button`
-  background-color: ${cores.color};
+  background-color: ${cores.colorPrimaria};
   color: ${cores.white};
   padding: 16px;
   font-size: 16px;
@@ -19,7 +19,7 @@ export const Buttons = styled.button`
   }
 `
 export const ButtonLink = styled(Link)`
-  background-color: ${cores.color};
+  background-color: ${cores.colorPrimaria};
   color: ${cores.white};
   padding: 16px;
   font-size: 16px;
