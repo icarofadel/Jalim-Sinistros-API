@@ -13,7 +13,7 @@ export const ModalWrapper = styled.div`
 `
 
 export const ModalContent = styled.div`
-  background: #3c3c3c;
+  background: #2b2b2b;
   padding: 20px;
   border-radius: 8px;
   min-width: 300px;
@@ -21,6 +21,7 @@ export const ModalContent = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px; /* Espaço entre os elementos */
+  color: #eaeaea;
 `
 
 export const Input = styled.input`
@@ -33,4 +34,85 @@ export const Input = styled.input`
 export const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
+`
+
+export const FilterGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 10px;
+  margin-bottom: 8px;
+`
+
+export const ButtonRow = styled.div`
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 6px;
+`
+
+export const TableWrapper = styled.div`
+  max-height: 300px;
+  overflow: auto;
+  margin-top: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 6px;
+`
+
+export const Table = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+  thead th {
+    position: sticky;
+    top: 0;
+    background: #222;
+    padding: 8px;
+    font-weight: 600;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  tbody td {
+    padding: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  }
+  tbody tr:hover {
+    background: rgba(255, 255, 255, 0.03);
+  }
+`
+
+export const Small = styled.small`
+  color: #cfcfcf;
+  font-size: 12px;
+`
+
+export const PaginationRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 4px;
+`
+
+export const PageButton = styled.button`
+  background: #2e8bf2;
+  color: #fff;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+`
+
+export const PageInfo = styled.div`
+  color: #d6d6d6;
+  font-size: 13px;
+`
+
+export const PageSizeSelect = styled.select`
+  padding: 6px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
 `

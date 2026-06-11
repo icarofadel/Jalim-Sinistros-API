@@ -14,6 +14,7 @@ import { BuscarSinistroModal } from '../BuscarSinistroModal'
 import {
   atualizarSinistro,
   buscarSinistroPorNF,
+  buscarSinistros,
   cadastrarSinistro,
   excluirSinistro
 } from '../../services/sinistroService'
@@ -206,7 +207,7 @@ const FormSinistro = () => {
         <BuscarSinistroModal
           fechar={() => setModalAberto(false)}
           preencherFormulario={preencherFormulario}
-          service={buscarSinistroPorNF} // <-- injeta a função do seu service parceiro
+          service={buscarSinistros} // busca lista completa e filtra no modal
         />
       )}
       <form onSubmit={handleSubmit}>
