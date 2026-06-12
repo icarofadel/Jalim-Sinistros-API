@@ -165,13 +165,13 @@ const NcParceiros = () => {
 
   return (
     <div>
-      {modalAberto && (
+      {/* {modalAberto && (
         <BuscarSinistroModal
           fechar={() => setModalAberto(false)}
           preencherFormulario={preencherFormulario}
           service={buscarSinistroParceiroPorNF} // <-- injeta a função do seu service parceiro
         />
-      )}
+      )} */}
       <form onSubmit={handleSubmit}>
         <S.CampoForm>
           <div>

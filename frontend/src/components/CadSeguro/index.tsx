@@ -677,13 +677,13 @@ const Seguro = () => {
             </Botao>
           </S.CampoButtons>
 
-          {modalAberto && (
+          {/* {modalAberto && (
             <BuscarSinistroModal
               fechar={() => setModalAberto(false)}
               preencherFormulario={preencherFormulario}
               service={buscarSinistroSeguradoraPorNF}
             />
-          )}
+          )} */}
         </div>
       </S.CampoForm>
     </form>

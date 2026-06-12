@@ -6,34 +6,47 @@ import * as S from './styles'
 
 const Central = () => (
   <S.HomeSection>
-    <h2>Sinistros</h2>
     <S.ContainerButtons>
       <S.Column>
-        <h3>Incluir registro</h3>
+        <h2>Sinistros</h2>
         <S.ControlButtons>
           <Botao type="link" to={`/CadSinistro`} title="Cadastro de sinistro">
             Cadastrar sinistro
           </Botao>
-          <Botao type="link" to={`/NcParceiro`} title="Cadastro de sinistro">
-            Cadastrar NC para parceiros
-          </Botao>
-          <Botao type="link" to={`/SiniSeguro`} title="Cadastro de sinistro">
-            Cadastrar sinistro no seguro
+          <Botao type="link" to={`/CadSinistro`} title="Consultar de sinistro">
+            Consultar sinistro
           </Botao>
         </S.ControlButtons>
       </S.Column>
 
       <S.Column>
-        <h3>Consultar</h3>
+        <h2>Parceiros</h2>
         <S.ControlButtons>
-          <Botao type="link" to={`/CadSinistro`} title="Consultar de sinistro">
-            Consultar sinistro
+          <Botao type="link" to={`/CadParceiro`} title="Cadastro de parceiro">
+            Cadastrar NC parceiro
           </Botao>
-          <Botao type="link" to={`/NcParceir`} title="Consultar de sinistro">
-            Consultar NC para parceiros
+          <Botao type="link" to={`/ConsParceiro`} title="Consultar de parceiro">
+            Consultar NC parceiro
           </Botao>
-          <Botao type="link" to={`/SiniSeguro`} title="Consultar de sinistro">
-            Consultar sinistro no seguro
+        </S.ControlButtons>
+      </S.Column>
+
+      <S.Column>
+        <h2>Seguradora</h2>
+        <S.ControlButtons>
+          <Botao
+            type="link"
+            to={`/CadSeguradora`}
+            title="Cadastro de seguradora"
+          >
+            Cadastrar seguradora
+          </Botao>
+          <Botao
+            type="link"
+            to={`/ConsSeguradora`}
+            title="Consultar de seguradora"
+          >
+            Consultar seguradora
           </Botao>
         </S.ControlButtons>
       </S.Column>
