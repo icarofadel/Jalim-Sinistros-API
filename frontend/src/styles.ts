@@ -17,7 +17,6 @@ export const breakponints = {
 
 export const GlobalCss = createGlobalStyle`
   html, body, #root {
-    height: 100%;
     margin: 0;
     padding: 0;
   }
@@ -35,7 +34,6 @@ export const GlobalCss = createGlobalStyle`
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    min-height: 100vh;
   }
 
   .container {

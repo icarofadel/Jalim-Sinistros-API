@@ -8,18 +8,16 @@ import Rotas from './routes'
 
 function App() {
   return (
-    <>
+    <BrowserRouter>
       <GlobalCss />
       <Header />
-      <BrowserRouter>
-        <div className="fundo">
-          <div className="container">
-            <Rotas />
-          </div>
+      <div className="fundo">
+        <div className="container">
+          <Rotas />
         </div>
-      </BrowserRouter>
+      </div>
       <Footer />
-    </>
+    </BrowserRouter>
   )
 }
 
