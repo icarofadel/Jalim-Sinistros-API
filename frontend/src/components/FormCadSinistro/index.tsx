@@ -5,10 +5,16 @@ import { NumericFormat } from 'react-number-format'
 
 // Estilos
 import * as S from '../../styles'
+import * as Ss from './styles'
 
 // Componentes
 import Botao from '../Button'
 import { BuscarSinistroModal } from '../BuscarSinistroModal'
+import voltar from '../../assets/assets/icons8-esquerda.gif'
+import atualizar from '../../assets/assets/icons8-actualizar.gif'
+import imprimir from '../../assets/assets/icons8-impressão.gif'
+import excluir from '../../assets/assets/icons8-lixo.gif'
+import imprimir from '../../assets/assets/icons8-pesquisar.gif'
 
 // Serviços
 import {
@@ -211,23 +217,35 @@ const FormSinistro = () => {
         />
       )}
       <form onSubmit={handleSubmit}>
+        <Ss.Campo>
+          <Botao
+            type="button"
+            title="Novo Sinistro"
+            onClick={handleNewSinistro}
+          >
+            + Novo sinistro
+          </Botao>
+        </Ss.Campo>
+
         <S.CampoForm>
           <div>
-            <S.Title>Cadastro de Sinistro</S.Title>
-            <S.Row>
-              <S.TextLabel htmlFor="idSinistro">ID do Sinistro</S.TextLabel>
-              <input
-                type="number"
-                name="id"
-                value={formData.id !== null ? formData.id : ''} // Evita NaN
-                onChange={(e) => {
-                  const valor = e.target.value ? Number(e.target.value) : null
-                  setFormData((prev) => ({ ...prev, id: valor }))
-                }}
-              />
-            </S.Row>
-            <S.TitleSecundario>Dados do sinistro</S.TitleSecundario>
-            <div>
+            <Ss.Destaque>
+              <S.Title>Informação do sinistro</S.Title>
+              <S.Row>
+                <S.TextLabel htmlFor="idSinistro">ID do Sinistro</S.TextLabel>
+                <input
+                  type="number"
+                  name="id"
+                  value={formData.id !== null ? formData.id : ''} // Evita NaN
+                  onChange={(e) => {
+                    const valor = e.target.value ? Number(e.target.value) : null
+                    setFormData((prev) => ({ ...prev, id: valor }))
+                  }}
+                />
+              </S.Row>
+            </Ss.Destaque>
+            <S.Linha />
+            <Ss.DivCampos>
               <S.Row>
                 <S.TextLabel htmlFor="DataOcorrencia">
                   Data da Ocorrência
@@ -248,6 +266,7 @@ const FormSinistro = () => {
                   onChange={handleInputChange}
                 />
               </S.Row>
+
               <S.Row>
                 <S.TextLabel htmlFor="NomeCliente">Nome do cliente</S.TextLabel>
                 <input
@@ -309,9 +328,10 @@ const FormSinistro = () => {
                   placeholder="R$ 0,00"
                 />
               </S.Row>
-            </div>
+            </Ss.DivCampos>
             <S.TitleSecundario>Responsabilidade</S.TitleSecundario>
-            <div>
+            <S.Linha />
+            <Ss.DivCamposResponsabilidade>
               <S.Row>
                 <S.TextLabel htmlFor="Responsavel1">Responsável 1</S.TextLabel>
                 <select
@@ -337,8 +357,9 @@ const FormSinistro = () => {
                   onChange={handleInputChange}
                 />
               </S.Row>
-            </div>
+            </Ss.DivCamposResponsabilidade>
             <S.TitleSecundario>Andamento</S.TitleSecundario>
+            <S.Linha />
             <div>
               <S.Row className="status">
                 <S.TextLabel htmlFor="Status">Status</S.TextLabel>
@@ -351,6 +372,7 @@ const FormSinistro = () => {
               </S.Row>
             </div>
             <S.TitleSecundario>Informações complementares</S.TitleSecundario>
+            <S.Linha />
             <div>
               <S.Row className="resumo">
                 <S.TextLabel htmlFor="CiaAerea">Cia. aérea</S.TextLabel>
@@ -385,88 +407,93 @@ const FormSinistro = () => {
               <div>
                 {formData.ciaAerea && (
                   <>
-                    <S.Row>
-                      <S.TextLabel htmlFor="CiaArea">
-                        Nome Cia. aérea
-                      </S.TextLabel>
-                      <input
-                        type="text"
-                        name="nomeCiaAerea"
-                        value={formData.nomeCiaAerea || ''}
-                        onChange={handleInputChange}
-                      />
-                    </S.Row>
-                    <S.Row>
-                      <S.TextLabel htmlFor="AWB">AWB</S.TextLabel>
-                      <input
-                        type="text"
-                        name="awb"
-                        value={formData.awb || ''}
-                        onChange={handleInputChange}
-                      />
-                    </S.Row>
+                    <Ss.DivCampos>
+                      <S.Row>
+                        <S.TextLabel htmlFor="CiaArea">
+                          Nome Cia. aérea
+                        </S.TextLabel>
+                        <input
+                          type="text"
+                          name="nomeCiaAerea"
+                          value={formData.nomeCiaAerea || ''}
+                          onChange={handleInputChange}
+                        />
+                      </S.Row>
+                      <S.Row>
+                        <S.TextLabel htmlFor="AWB">AWB</S.TextLabel>
+                        <input
+                          type="text"
+                          name="awb"
+                          value={formData.awb || ''}
+                          onChange={handleInputChange}
+                        />
+                      </S.Row>
+                    </Ss.DivCampos>
                   </>
                 )}
                 {formData.motorista && (
                   <>
-                    <S.Row>
-                      <S.TextLabel htmlFor="Motorista">Motorista</S.TextLabel>
-                      <input
-                        type="text"
-                        name="nomeMotorista"
-                        value={formData.nomeMotorista || ''}
-                        onChange={handleInputChange}
-                      />
-                    </S.Row>
-                    <S.Row>
-                      <S.TextLabel htmlFor="cpf">CPF</S.TextLabel>
-                      <InputMask
-                        mask="999.999.999-99"
-                        value={formData.cpf}
-                        onChange={handleInputChange}
-                      >
-                        {(inputProps: any) => (
-                          <input
-                            {...inputProps}
-                            type="text"
-                            name="cpf"
-                            id="cpf"
-                          />
-                        )}
-                      </InputMask>
-                    </S.Row>
-                    <S.Row>
-                      <S.TextLabel htmlFor="Placa">Placa</S.TextLabel>
-                      <input
-                        type="text"
-                        name="placa"
-                        value={formData.placa || ''}
-                        onChange={handleInputChange}
-                      />
-                    </S.Row>
-                    <S.Row>
-                      <S.TextLabel htmlFor="Manifesto">Manifesto</S.TextLabel>
-                      <input
-                        type="number"
-                        name="manifesto"
-                        value={formData.manifesto || ''}
-                        onChange={handleInputChange}
-                      />
-                    </S.Row>
-                    <S.Row>
-                      <S.TextLabel htmlFor="Local">Local</S.TextLabel>
-                      <input
-                        type="text"
-                        name="local"
-                        value={formData.local || ''}
-                        onChange={handleInputChange}
-                      />
-                    </S.Row>
+                    <Ss.DivCampos>
+                      <S.Row>
+                        <S.TextLabel htmlFor="Motorista">Motorista</S.TextLabel>
+                        <input
+                          type="text"
+                          name="nomeMotorista"
+                          value={formData.nomeMotorista || ''}
+                          onChange={handleInputChange}
+                        />
+                      </S.Row>
+                      <S.Row>
+                        <S.TextLabel htmlFor="cpf">CPF</S.TextLabel>
+                        <InputMask
+                          mask="999.999.999-99"
+                          value={formData.cpf}
+                          onChange={handleInputChange}
+                        >
+                          {(inputProps: any) => (
+                            <input
+                              {...inputProps}
+                              type="text"
+                              name="cpf"
+                              id="cpf"
+                            />
+                          )}
+                        </InputMask>
+                      </S.Row>
+                      <S.Row>
+                        <S.TextLabel htmlFor="Placa">Placa</S.TextLabel>
+                        <input
+                          type="text"
+                          name="placa"
+                          value={formData.placa || ''}
+                          onChange={handleInputChange}
+                        />
+                      </S.Row>
+                      <S.Row>
+                        <S.TextLabel htmlFor="Manifesto">Manifesto</S.TextLabel>
+                        <input
+                          type="number"
+                          name="manifesto"
+                          value={formData.manifesto || ''}
+                          onChange={handleInputChange}
+                        />
+                      </S.Row>
+                      <S.Row>
+                        <S.TextLabel htmlFor="Local">Local</S.TextLabel>
+                        <input
+                          type="text"
+                          name="local"
+                          value={formData.local || ''}
+                          onChange={handleInputChange}
+                        />
+                      </S.Row>
+                    </Ss.DivCampos>
                   </>
                 )}
               </div>
             </div>
             <S.TitleSecundario>Finalização</S.TitleSecundario>
+            <S.Linha />
             <div>
               <S.Row>
                 <S.TextLabel htmlFor="EntregueFinanceiro">
@@ -484,15 +511,19 @@ const FormSinistro = () => {
                   }
                 />
               </S.Row>
-              <S.Row>
-                <S.TextLabel htmlFor="DataEntrega">Data da entrega</S.TextLabel>
-                <input
-                  type="date"
-                  name="dataEntrega"
-                  value={formData.dataEntrega || ''}
-                  onChange={handleInputChange}
-                />
-              </S.Row>
+              <Ss.DivCampos>
+                <S.Row>
+                  <S.TextLabel htmlFor="DataEntrega">
+                    Data da entrega
+                  </S.TextLabel>
+                  <input
+                    type="date"
+                    name="dataEntrega"
+                    value={formData.dataEntrega || ''}
+                    onChange={handleInputChange}
+                  />
+                </S.Row>
+              </Ss.DivCampos>
             </div>{' '}
             <S.CampoButtons>
               <Botao
@@ -518,7 +549,7 @@ const FormSinistro = () => {
                 title="Buscar"
                 onClick={() => setModalAberto(true)}
               >
-                Buscar
+                buscar
               </Botao>
 
               <Botao type="submit" title="Salvar">

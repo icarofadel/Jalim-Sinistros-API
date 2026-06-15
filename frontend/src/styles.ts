@@ -3,7 +3,7 @@ import { createGlobalStyle, styled } from 'styled-components'
 export const cores = {
   fundoPrincipal: '#F8FAFC',
   sidebar: '#0F172A',
-  white: '#fff',
+  white: '#ffffff',
   colorPrimaria: '#2563EB',
   corSecundária: '#64748B',
   sucesso: '#16A34A',
@@ -42,17 +42,12 @@ export const GlobalCss = createGlobalStyle`
     margin: 0 auto;
   }
 `
-export const CampoForm = styled.div`
-  color: ${cores.colorPrimaria};
-`
 
 export const Title = styled.h3`
   color: ${cores.colorPrimaria};
   padding: 8px;
   font-size: 24px;
   font-weight: bold;
-  display: flex;
-  justify-content: center;
 `
 export const TitleSecundario = styled.span`
   color: ${cores.corSecundária};
@@ -61,7 +56,7 @@ export const TitleSecundario = styled.span`
 `
 
 export const Row = styled.div`
-  margin: 16px 0;
+  margin: 8px;
 
   &.status {
     display: flex;
@@ -69,15 +64,25 @@ export const Row = styled.div`
   }
 
   input {
+    margin: 8px 0;
     border-radius: 8px;
     padding: 3px;
     text-align: center;
   }
 
   select {
+    margin: 8px;
     border-radius: 8px;
     padding: 3px;
   }
+`
+
+export const CampoForm = styled.div`
+  color: ${cores.colorPrimaria};
+`
+
+export const Linha = styled.div`
+  border: 1px solid ${cores.sidebar};
 `
 
 export const TextLabel = styled.label`
