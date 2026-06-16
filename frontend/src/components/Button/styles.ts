@@ -13,6 +13,8 @@ export const Buttons = styled.button`
   border-radius: 16px;
   cursor: pointer;
   border: none;
+  display: flex;
+  align-items: center;
 
   &.botaoFechar {
     background-color: red;

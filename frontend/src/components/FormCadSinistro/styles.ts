@@ -18,3 +18,7 @@ export const DivCamposResponsabilidade = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 0fr);
 `
+export const botoes = styled.div`
+  display: flex;
+  align-items: center;
+`

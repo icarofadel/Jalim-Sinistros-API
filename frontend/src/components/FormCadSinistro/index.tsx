@@ -10,11 +10,11 @@ import * as Ss from './styles'
 // Componentes
 import Botao from '../Button'
 import { BuscarSinistroModal } from '../BuscarSinistroModal'
-import voltar from '../../assets/assets/icons8-esquerda.gif'
-import atualizar from '../../assets/assets/icons8-actualizar.gif'
-import imprimir from '../../assets/assets/icons8-impressão.gif'
-import excluir from '../../assets/assets/icons8-lixo.gif'
-import imprimir from '../../assets/assets/icons8-pesquisar.gif'
+import voltarIcon from '../../assets/assets/icons8-esquerda-50.png'
+import atualizarIcon from '../../assets/assets/icons8-save-50.png'
+import imprimirIcon from '../../assets/assets/icons8-imprimir-50.png'
+import excluirIcon from '../../assets/assets/icons8-lixo-50.png'
+import pesquisarIcon from '../../assets/assets/icons8-search-50.png'
 
 // Serviços
 import {
@@ -526,21 +526,20 @@ const FormSinistro = () => {
               </Ss.DivCampos>
             </div>{' '}
             <S.CampoButtons>
-              <Botao
-                type="button"
-                title="Novo Sinistro"
-                onClick={handleNewSinistro}
-              >
-                Adicionar novo sinistro
-              </Botao>
-
               {formData.id && (
                 <Botao
                   type="button"
                   onClick={handleAtualizarSinistro}
                   title={'Atualizar Sinistro'}
                 >
-                  Atualizar
+                  <>
+                    <img
+                      src={atualizarIcon}
+                      alt="Atualizar"
+                      style={{ width: 18, marginRight: 6 }}
+                    />
+                    Atualizar
+                  </>
                 </Botao>
               )}
 
@@ -549,15 +548,25 @@ const FormSinistro = () => {
                 title="Buscar"
                 onClick={() => setModalAberto(true)}
               >
-                buscar
-              </Botao>
-
-              <Botao type="submit" title="Salvar">
-                Salvar
+                <>
+                  <img
+                    src={pesquisarIcon}
+                    alt="Buscar"
+                    style={{ width: 18, marginRight: 6 }}
+                  />
+                  Buscar
+                </>
               </Botao>
 
               <Botao type="button" title="Imprimir" onClick={handlePrint}>
-                Imprimir
+                <>
+                  <img
+                    src={imprimirIcon}
+                    alt="Imprimir"
+                    style={{ width: 18, marginRight: 6 }}
+                  />
+                  Imprimir
+                </>
               </Botao>
 
               <Botao
@@ -566,7 +575,14 @@ const FormSinistro = () => {
                 onClick={handleDelete}
                 className="botaoFechar"
               >
-                Excluir
+                <>
+                  <img
+                    src={excluirIcon}
+                    alt="Excluir"
+                    style={{ width: 18, marginRight: 6 }}
+                  />
+                  Excluir
+                </>
               </Botao>
 
               <Botao
@@ -575,7 +591,14 @@ const FormSinistro = () => {
                 title="Fechar"
                 className="botaoFechar"
               >
-                Fechar
+                <>
+                  <img
+                    src={voltarIcon}
+                    alt="Voltar"
+                    style={{ width: 18, marginRight: 6 }}
+                  />
+                  Voltar
+                </>
               </Botao>
             </S.CampoButtons>
           </div>
