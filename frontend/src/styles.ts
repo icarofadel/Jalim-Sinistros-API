@@ -1,10 +1,10 @@
 import { createGlobalStyle, styled } from 'styled-components'
 
 export const cores = {
-  fundoPrincipal: '#F8FAFC',
+  fundoPrincipal: '#F6FCFF',
   sidebar: '#0F172A',
   white: '#ffffff',
-  colorPrimaria: '#2563EB',
+  colorPrimaria: '#4D3EFC',
   corSecundária: '#64748B',
   sucesso: '#16A34A',
   exclusao: '#DC2626'
@@ -19,6 +19,7 @@ export const GlobalCss = createGlobalStyle`
   html, body, #root {
     margin: 0;
     padding: 0;
+    background-color: ${cores.fundoPrincipal};
   }
 
   * {
@@ -50,7 +51,7 @@ export const Title = styled.h3`
   font-weight: bold;
 `
 export const TitleSecundario = styled.span`
-  color: ${cores.corSecundária};
+  color: ${cores.colorPrimaria};
   margin: 32px 0;
   font-weight: bold;
 `
@@ -78,7 +79,7 @@ export const Row = styled.div`
 `
 
 export const CampoForm = styled.div`
-  color: ${cores.colorPrimaria};
+  color: ${cores.sidebar};
 `
 
 export const Linha = styled.div`

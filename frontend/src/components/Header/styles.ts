@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { breakponints, cores } from '../../styles'
 
 export const HeaderBar = styled.header`
-  background-color: ${cores.sidebar};
+  background-color: ${cores.fundoPrincipal};
   color: ${cores.colorPrimaria};
 
   div {
