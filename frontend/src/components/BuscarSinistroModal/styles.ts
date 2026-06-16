@@ -7,6 +7,9 @@ export const TitleBuscar = styled.div`
   padding: 12px;
   border-radius: 6px;
   margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
   h2 {
     margin: 0;

@@ -56,7 +56,7 @@ export const Dropdown = styled.div`
   left: 0;
   display: flex;
   flex-direction: column;
-  background: ${cores.sidebar};
+  background: ${cores.destaque};
   padding: 8px;
   border-radius: 8px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
@@ -66,7 +66,8 @@ export const Dropdown = styled.div`
   button {
     margin: 4px 8px;
     padding: 8px 12px;
-    background: ${cores.sidebar};
+    background: ${cores.destaque};
+    color: ${cores.colorPrimaria};
 
     &:hover {
       background: ${cores.colorPrimaria};

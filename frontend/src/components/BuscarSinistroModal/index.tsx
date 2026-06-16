@@ -126,6 +126,9 @@ export const BuscarSinistro = ({
     <>
       <S.TitleBuscar>
         <h2>Cadastro de Sinistro</h2>
+        <Botao type="link" to={`/CadSinistro`} title="Cadastro de sinistro">
+          + Novo sinistro
+        </Botao>
       </S.TitleBuscar>
 
       <S.FilterGrid>
