@@ -90,20 +90,24 @@ export const TableWrapper = styled.div`
 
 export const Table = styled.table`
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
 
   thead th {
     position: sticky;
     top: 0;
     color: ${cores.colorPrimaria};
+    background: ${cores.destaque};
+    z-index: 10; /* acima das linhas */
     padding: 8px;
     font-weight: 600;
     text-align: center;
-    border: 1px solid ${cores.sidebar};
+    border-bottom: 2px solid ${cores.sidebar};
   }
   tbody td {
     padding: 8px;
     border-bottom: 1px solid ${cores.sidebar};
+    background: transparent;
   }
   tbody tr:hover {
     background: ${cores.colorPrimaria};

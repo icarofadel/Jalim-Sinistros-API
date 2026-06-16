@@ -235,7 +235,7 @@ export const BuscarSinistro = ({
             value={filters.responsavel1}
             onChange={handleFilterChange}
           >
-            <option value="">esponsabilidades</option>
+            <option value="">Responsabilidades</option>
             <option value="SeguroProprio">Seguro Próprio</option>
             <option value="ImpactoIBL">Impacto IBL</option>
             <option value="ImpactoLogic">Impacto Logic</option>
