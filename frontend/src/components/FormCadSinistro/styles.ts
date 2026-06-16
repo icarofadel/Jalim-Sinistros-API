@@ -13,6 +13,10 @@ export const Destaque = styled.div`
 export const DivCampos = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
+
+  div {
+    display: grid;
+  }
 `
 export const DivCamposResponsabilidade = styled.div`
   display: grid;
