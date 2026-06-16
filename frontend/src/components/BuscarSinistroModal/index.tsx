@@ -2,13 +2,11 @@ import { useEffect, useState } from 'react'
 import * as S from './styles'
 import Botao from '../Button'
 
-export const BuscarSinistroModal = ({
-  fechar,
-  preencherFormulario,
+export const BuscarSinistro = ({
+  onSelect,
   service
 }: {
-  fechar: () => void
-  preencherFormulario: (dados: any) => void
+  onSelect: (dados: any) => void
   service: () => Promise<any[]>
 }) => {
   const [filters, setFilters] = useState({
@@ -53,7 +51,6 @@ export const BuscarSinistroModal = ({
 
   const applyFilters = () => {
     const res = allSinistros.filter((s) => {
-      // data range
       if (filters.dateFrom) {
         const from = new Date(filters.dateFrom)
         const d = new Date(s.dataOcorrencia)
@@ -122,48 +119,59 @@ export const BuscarSinistroModal = ({
   }
 
   const handleSelect = (item: any) => {
-    preencherFormulario(item)
-    fechar()
+    onSelect(item)
   }
 
   return (
-    <S.ModalWrapper>
-      <S.ModalContent>
-        <h2>Buscar Sinistro</h2>
+    <>
+      <S.TitleBuscar>
+        <h2>Cadastro de Sinistro</h2>
+      </S.TitleBuscar>
 
-        <S.FilterGrid>
-          <div>
-            <label htmlFor="dateFrom">Data inicial</label>
-            <input
-              name="dateFrom"
-              type="date"
-              value={filters.dateFrom}
-              onChange={handleFilterChange}
-              title="Data inicial"
-            />
-          </div>
-          <input
+      <S.FilterGrid>
+        <S.CamposBuscas>
+          <label htmlFor="dateFrom">Data inicial</label>
+          <S.Input
+            name="dateFrom"
+            type="date"
+            value={filters.dateFrom}
+            onChange={handleFilterChange}
+            title="Data inicial"
+          />
+        </S.CamposBuscas>
+        <S.CamposBuscas>
+          <label htmlFor="dateTo">Data final</label>
+          <S.Input
             name="dateTo"
             type="date"
             value={filters.dateTo}
             onChange={handleFilterChange}
             title="Data final"
           />
-          <input
+        </S.CamposBuscas>
+        <S.CamposBuscas>
+          <label htmlFor="notaFiscal">Nota Fiscal</label>
+          <S.Input
             name="notaFiscal"
             type="text"
             value={filters.notaFiscal}
             onChange={handleFilterChange}
             placeholder="Nota Fiscal"
           />
-          <input
+        </S.CamposBuscas>
+        <S.CamposBuscas>
+          <label htmlFor="nomeCliente">Nome do cliente</label>
+          <S.Input
             name="nomeCliente"
             type="text"
             value={filters.nomeCliente}
             onChange={handleFilterChange}
             placeholder="Nome do cliente"
           />
-          <select
+        </S.CamposBuscas>
+        <S.CamposBuscas>
+          <label htmlFor="segmento">Segmento</label>
+          <S.Select
             name="segmento"
             value={filters.segmento}
             onChange={handleFilterChange}
@@ -172,8 +180,11 @@ export const BuscarSinistroModal = ({
             <option value="Eletronico">Eletrônico</option>
             <option value="Farmaco">Farmaco</option>
             <option value="Alimenticio">Alimentício</option>
-          </select>
-          <select
+          </S.Select>
+        </S.CamposBuscas>
+        <S.CamposBuscas>
+          <label htmlFor="motivo">Motivo</label>
+          <S.Select
             name="motivo"
             value={filters.motivo}
             onChange={handleFilterChange}
@@ -185,34 +196,46 @@ export const BuscarSinistroModal = ({
             <option value="Acidente">Acidente</option>
             <option value="ViolacaoLacre">Violação de lacre</option>
             <option value="PercaTemperatura">Perda de temperatura</option>
-          </select>
-          <input
+          </S.Select>
+        </S.CamposBuscas>
+        <S.CamposBuscas>
+          <label htmlFor="valorMin">Valor Mínimo</label>
+          <S.Input
             name="valorMin"
             type="number"
             value={filters.valorMin}
             onChange={handleFilterChange}
             placeholder="Valor mínimo"
           />
-          <input
+        </S.CamposBuscas>
+        <S.CamposBuscas>
+          <label htmlFor="valorMax">Valor Máximo</label>
+          <S.Input
             name="valorMax"
             type="number"
             value={filters.valorMax}
             onChange={handleFilterChange}
             placeholder="Valor máximo"
           />
-          <input
+        </S.CamposBuscas>
+        <S.CamposBuscas>
+          <label htmlFor="status">Status</label>
+          <S.Input
             name="status"
             type="text"
             value={filters.status}
             onChange={handleFilterChange}
             placeholder="Status"
           />
-          <select
+        </S.CamposBuscas>
+        <S.CamposBuscas>
+          <label htmlFor="responsavel1">Responsável 1</label>
+          <S.Select
             name="responsavel1"
             value={filters.responsavel1}
             onChange={handleFilterChange}
           >
-            <option value="">Todas responsabilidades</option>
+            <option value="">esponsabilidades</option>
             <option value="SeguroProprio">Seguro Próprio</option>
             <option value="ImpactoIBL">Impacto IBL</option>
             <option value="ImpactoLogic">Impacto Logic</option>
@@ -220,119 +243,136 @@ export const BuscarSinistroModal = ({
             <option value="SeguroCliente">Seguro Cliente</option>
             <option value="Improcedente">Improcedente</option>
             <option value="EmAndamento">Em andamento</option>
-          </select>
-        </S.FilterGrid>
+          </S.Select>
+        </S.CamposBuscas>
+      </S.FilterGrid>
 
-        <S.ButtonRow>
-          <Botao type="button" title="Buscar" onClick={applyFilters}>
-            Buscar
-          </Botao>
-          <Botao type="button" title="Limpar" onClick={clearFilters}>
-            Limpar
-          </Botao>
-          <Botao
-            onClick={fechar}
-            type="button"
-            title="Fechar"
-            className="botaoFechar"
-          >
-            Fechar
-          </Botao>
-        </S.ButtonRow>
+      <S.ButtonRow>
+        <Botao type="button" title="Buscar" onClick={applyFilters}>
+          Buscar
+        </Botao>
+        <Botao type="button" title="Limpar" onClick={clearFilters}>
+          Limpar
+        </Botao>
+      </S.ButtonRow>
 
-        {erro && <p style={{ color: 'red' }}>{erro}</p>}
+      {erro && <p style={{ color: 'red' }}>{erro}</p>}
 
-        <S.TableWrapper>
-          <S.Table>
-            <thead>
-              <tr>
-                <th style={{ width: 110 }}>Data</th>
-                <th style={{ width: 90 }}>NF</th>
-                <th>Cliente</th>
-                <th style={{ width: 120 }}>Segmento</th>
-                <th style={{ width: 120 }}>Motivo</th>
-                <th style={{ width: 110 }}>Valor</th>
-                <th style={{ width: 140 }}>Status</th>
-                <th style={{ width: 140 }}>Responsável</th>
-              </tr>
-            </thead>
-            <tbody>
-              {(() => {
-                const total = results.length
-                const startIdx = (page - 1) * pageSize
-                const endIdx = Math.min(startIdx + pageSize, total)
-                const paged = results.slice(startIdx, endIdx)
-                return paged.map((r) => {
-                  const fmt = new Intl.NumberFormat('pt-BR', {
-                    style: 'currency',
-                    currency: 'BRL'
-                  })
-                  return (
-                    <tr
-                      key={r.id}
-                      onClick={() => handleSelect(r)}
-                      style={{ cursor: 'pointer' }}
-                    >
-                      <td>{r.dataOcorrencia}</td>
-                      <td>{r.notaFiscal}</td>
-                      <td>{r.nomeCliente}</td>
-                      <td>{r.segmento}</td>
-                      <td>{r.motivo}</td>
-                      <td>
-                        {r.valorSinistro ? fmt.format(r.valorSinistro) : ''}
-                      </td>
-                      <td>{r.status}</td>
-                      <td>{r.responsavel1}</td>
-                    </tr>
-                  )
+      <S.TableWrapper>
+        <S.Table>
+          <thead>
+            <tr>
+              <th style={{ width: 110 }}>Data</th>
+              <th style={{ width: 90 }}>NF</th>
+              <th>Cliente</th>
+              <th style={{ width: 120 }}>Segmento</th>
+              <th style={{ width: 120 }}>Motivo</th>
+              <th style={{ width: 110 }}>Valor</th>
+              <th style={{ width: 140 }}>Status</th>
+              <th style={{ width: 140 }}>Responsável</th>
+            </tr>
+          </thead>
+          <tbody>
+            {(() => {
+              const total = results.length
+              const startIdx = (page - 1) * pageSize
+              const endIdx = Math.min(startIdx + pageSize, total)
+              const paged = results.slice(startIdx, endIdx)
+              return paged.map((r) => {
+                const fmt = new Intl.NumberFormat('pt-BR', {
+                  style: 'currency',
+                  currency: 'BRL'
                 })
-              })()}
-            </tbody>
-          </S.Table>
+                return (
+                  <tr
+                    key={r.id}
+                    onClick={() => handleSelect(r)}
+                    style={{ cursor: 'pointer' }}
+                  >
+                    <td>{r.dataOcorrencia}</td>
+                    <td>{r.notaFiscal}</td>
+                    <td>{r.nomeCliente}</td>
+                    <td>{r.segmento}</td>
+                    <td>{r.motivo}</td>
+                    <td>
+                      {r.valorSinistro ? fmt.format(r.valorSinistro) : ''}
+                    </td>
+                    <td>{r.status}</td>
+                    <td>{r.responsavel1}</td>
+                  </tr>
+                )
+              })
+            })()}
+          </tbody>
+        </S.Table>
 
-          <S.PaginationRow>
-            <S.PageInfo>
-              {results.length === 0
-                ? 'Nenhum resultado'
-                : `Exibindo ${Math.min(
-                    (page - 1) * pageSize + 1,
-                    results.length
-                  )} - ${Math.min(page * pageSize, results.length)} de ${
-                    results.length
-                  }`}
-            </S.PageInfo>
+        <S.PaginationRow>
+          <S.PageInfo>
+            {results.length === 0
+              ? 'Nenhum resultado'
+              : `Exibindo ${Math.min(
+                  (page - 1) * pageSize + 1,
+                  results.length
+                )} - ${Math.min(page * pageSize, results.length)} de ${
+                  results.length
+                }`}
+          </S.PageInfo>
 
-            <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-              <S.PageSizeSelect
-                value={pageSize}
-                onChange={(e) => {
-                  setPageSize(Number(e.target.value))
-                  setPage(1)
-                }}
-              >
-                <option value={5}>5</option>
-                <option value={10}>10</option>
-                <option value={20}>20</option>
-                <option value={50}>50</option>
-              </S.PageSizeSelect>
+          <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+            <S.PageSizeSelect
+              value={pageSize}
+              onChange={(e) => {
+                setPageSize(Number(e.target.value))
+                setPage(1)
+              }}
+            >
+              <option value={5}>5</option>
+              <option value={10}>10</option>
+              <option value={20}>20</option>
+              <option value={50}>50</option>
+            </S.PageSizeSelect>
 
-              <S.PageButton
-                onClick={() => setPage((p) => Math.max(1, p - 1))}
-                disabled={page <= 1}
-              >
-                Anterior
-              </S.PageButton>
+            <S.PageButton
+              onClick={() => setPage((p) => Math.max(1, p - 1))}
+              disabled={page <= 1}
+            >
+              Anterior
+            </S.PageButton>
 
-              <S.PageButton
-                onClick={() => setPage((p) => p + 1)}
-                disabled={page * pageSize >= results.length}
-              >
-                Próximo
-              </S.PageButton>
-            </div>
-          </S.PaginationRow>
-        </S.TableWrapper>
+            <S.PageButton
+              onClick={() => setPage((p) => p + 1)}
+              disabled={page * pageSize >= results.length}
+            >
+              Próximo
+            </S.PageButton>
+          </div>
+        </S.PaginationRow>
+      </S.TableWrapper>
+    </>
+  )
+}
+
+export const BuscarSinistroModal = ({
+  fechar,
+  preencherFormulario,
+  service
+}: {
+  fechar: () => void
+  preencherFormulario: (dados: any) => void
+  service: () => Promise<any[]>
+}) => {
+  const handleSelect = (item: any) => {
+    preencherFormulario(item)
+    fechar()
+  }
+
+  return (
+    <S.ModalWrapper>
+      <S.ModalContent>
+        <BuscarSinistro onSelect={handleSelect} service={service} />
       </S.ModalContent>
     </S.ModalWrapper>
   )
 }
+
+export default BuscarSinistro

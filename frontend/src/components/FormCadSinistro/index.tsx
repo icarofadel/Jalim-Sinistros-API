@@ -1,5 +1,6 @@
 // Pacotes externos
 import { useEffect, useState } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
 import InputMask from 'react-input-mask'
 import { NumericFormat } from 'react-number-format'
 
@@ -9,7 +10,7 @@ import * as Ss from './styles'
 
 // Componentes
 import Botao from '../Button'
-import { BuscarSinistroModal } from '../BuscarSinistroModal'
+import { BuscarSinistro } from '../BuscarSinistroModal'
 import voltarIcon from '../../assets/assets/icons8-esquerda-50.png'
 import atualizarIcon from '../../assets/assets/icons8-save-50.png'
 import imprimirIcon from '../../assets/assets/icons8-imprimir-50.png'
@@ -27,7 +28,8 @@ import {
 
 const FormSinistro = () => {
   const [selected, setSelected] = useState<string | null>(null)
-  const [modalAberto, setModalAberto] = useState(false)
+  const navigate = useNavigate()
+  const location = useLocation()
 
   // Dados do formulário
   const [formData, setFormData] = useState({
@@ -148,6 +150,15 @@ const FormSinistro = () => {
     })
   }
 
+  useEffect(() => {
+    // If navigated from the search page with a selected sinistro, populate the form
+    const state: any = (location && (location as any).state) || {}
+    if (state && state.sinistro) {
+      const dados = state.sinistro
+      setFormData((prev) => ({ ...prev, ...dados }))
+    }
+  }, [location])
+
   const preencherFormulario = (dados: any) => {
     setFormData({
       id: dados.id,
@@ -209,13 +220,6 @@ const FormSinistro = () => {
 
   return (
     <div>
-      {modalAberto && (
-        <BuscarSinistroModal
-          fechar={() => setModalAberto(false)}
-          preencherFormulario={preencherFormulario}
-          service={buscarSinistros} // busca lista completa e filtra no modal
-        />
-      )}
       <form onSubmit={handleSubmit}>
         <Ss.Campo>
           <Botao
@@ -546,7 +550,7 @@ const FormSinistro = () => {
               <Botao
                 type="button"
                 title="Buscar"
-                onClick={() => setModalAberto(true)}
+                onClick={() => navigate('/BuscarSinistro')}
               >
                 <>
                   <img

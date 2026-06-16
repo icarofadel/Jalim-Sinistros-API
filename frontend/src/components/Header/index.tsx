@@ -48,7 +48,7 @@ const Header = () => {
                 </Botao>
                 <Botao
                   type="link"
-                  to={`/CadSinistro`}
+                  to={`/BuscarSinistro`}
                   title="Consultar de sinistro"
                 >
                   Consultar sinistro

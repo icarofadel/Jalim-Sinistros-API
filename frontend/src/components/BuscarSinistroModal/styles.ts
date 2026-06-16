@@ -1,6 +1,20 @@
 import styled from 'styled-components'
 import { cores } from '../../styles'
 
+export const TitleBuscar = styled.div`
+  background: ${cores.destaque};
+  color: ${cores.colorPrimaria};
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+
+  h2 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 400;
+  }
+`
+
 export const ModalWrapper = styled.div`
   position: fixed;
   top: 0;
@@ -25,10 +39,25 @@ export const ModalContent = styled.div`
   color: ${cores.colorPrimaria};
 `
 
+export const CamposBuscas = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`
+
 export const Input = styled.input`
   width: 100%;
   padding: 8px;
-  border: 1px solid #ccc;
+  border: none;
+  border-bottom: 1px solid ${cores.sidebar};
+  border-radius: 4px;
+`
+
+export const Select = styled.select`
+  width: 100%;
+  padding: 8px;
+  border: none;
+  border-bottom: 1px solid ${cores.sidebar};
   border-radius: 4px;
 `
 
@@ -55,28 +84,29 @@ export const TableWrapper = styled.div`
   max-height: 300px;
   overflow: auto;
   margin-top: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: ${cores.destaque};
   border-radius: 6px;
 `
 
 export const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
+
   thead th {
     position: sticky;
     top: 0;
-    background: ${cores.fundoPrincipal};
+    color: ${cores.colorPrimaria};
     padding: 8px;
     font-weight: 600;
-    text-align: left;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    text-align: center;
+    border: 1px solid ${cores.sidebar};
   }
   tbody td {
     padding: 8px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid ${cores.sidebar};
   }
   tbody tr:hover {
-    background: rgba(255, 255, 255, 0.03);
+    background: ${cores.colorPrimaria};
   }
 `
 

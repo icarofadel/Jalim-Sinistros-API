@@ -4,6 +4,7 @@ export const cores = {
   fundoPrincipal: '#F6FCFF',
   sidebar: '#0F172A',
   white: '#ffffff',
+  destaque: '#D9D9D9',
   colorPrimaria: '#4D3EFC',
   corSecundária: '#64748B',
   sucesso: '#16A34A',
