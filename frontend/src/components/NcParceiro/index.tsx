@@ -1,5 +1,6 @@
 // Pacotes externos
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import InputMask from 'react-input-mask'
 import { NumericFormat } from 'react-number-format'
 
@@ -38,6 +39,15 @@ const NcParceiros = () => {
   // Para armazenar o ID do sinistro (para atualizar/excluir)
   const [sinistroId, setSinistroId] = useState<number | null>(null)
 
+  const location = useLocation()
+
+  useEffect(() => {
+    const state: any = (location && (location as any).state) || {}
+    if (state && state.sinistro) {
+      preencherFormulario(state.sinistro)
+    }
+  }, [location])
+
   const handleInputChange = (name: string, value: string) => {
     const onlyDigits = name === 'CnpjSacado' ? value.replace(/\D/g, '') : value
     setFormData((prev) => ({
@@ -49,11 +59,23 @@ const NcParceiros = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
-      await cadastrarSinistro(formData) // Usa a função do service
-      alert('Sinistro cadastrado com sucesso!')
+      // Validações básicas de NC Parceiro
+      if (!formData.notaFiscal) {
+        alert('Informe a Nota Fiscal antes de gerar a NC.')
+        return
+      }
+      if (!formData.nomeCliente) {
+        alert('Informe o nome do cliente antes de gerar a NC.')
+        return
+      }
+
+      const dadosTratados = prepararDadosParaEnvio(formData)
+      await cadastrarSinistro(dadosTratados) // Usa a função do service
+      alert('NC Parceiro cadastrada com sucesso!')
       handleNewSinistro()
     } catch (error) {
-      alert('Erro ao cadastrar sinistro')
+      alert('Erro ao cadastrar NC Parceiro')
+      console.error(error)
     }
   }
 
@@ -85,10 +107,12 @@ const NcParceiros = () => {
     }
 
     try {
-      await atualizarSinistro(Number(formData.id), formData)
+      const dadosTratados = prepararDadosParaEnvio(formData)
+      await atualizarSinistro(Number(formData.id), dadosTratados)
       alert('Sinistro atualizado com sucesso!')
     } catch (error) {
       alert('Erro ao atualizar o sinistro.')
+      console.error(error)
     }
   }
 
@@ -137,8 +161,21 @@ const NcParceiros = () => {
       sacado: dados.sacado,
       cnpjSacado: dados.cnpjSacado,
       envioControladoria: dados.dataenviocontroladoria,
-      nFatura: dados.nFatura
+      nFatura: dados.nFatura,
+      sinistroOrigemId: dados.id
     })
+  }
+
+  const prepararDadosParaEnvio = (data: any) => {
+    return {
+      ...data,
+      sinistroOrigemId: data.sinistroOrigemId ?? null,
+      cnpjSacado: data.cnpjSacado ? String(data.cnpjSacado).replace(/\D/g, '') : '',
+      manifesto: data.manifesto ? Number(data.manifesto) : null,
+      valorSinistro: data.valorSinistro ? Number(data.valorSinistro) : null,
+      envioControladoria: data.envioControladoria || null,
+      dataOcorrencia: data.dataOcorrencia || null
+    }
   }
 
   const handleDownloadCarta = async () => {

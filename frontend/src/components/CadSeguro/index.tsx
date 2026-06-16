@@ -1,5 +1,6 @@
 // Pacotes externos
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import { NumericFormat } from 'react-number-format'
 import InputMask from 'react-input-mask'
 
@@ -215,6 +216,15 @@ const Seguro = () => {
       status: dados.status || ''
     })
   }
+
+  const location = useLocation()
+
+  useEffect(() => {
+    const state: any = (location && (location as any).state) || {}
+    if (state && state.sinistro) {
+      preencherFormulario(state.sinistro)
+    }
+  }, [location])
 
   const handleAtualizarSinistro = async () => {
     try {
