@@ -8,7 +8,7 @@ export const Campo = styled.div`
 
 export const DivCamposResponsabilidade = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 0fr);
+  grid-template-columns: repeat(4, 1fr);
 `
 export const botoes = styled.div`
   display: flex;

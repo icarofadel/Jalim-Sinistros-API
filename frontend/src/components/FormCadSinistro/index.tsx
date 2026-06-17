@@ -361,7 +361,7 @@ const FormSinistro = () => {
                   onChange={handleInputChange}
                 />
               </S.Row>
-              <S.Row style={{ gap: 8, alignItems: 'center' }}>
+              <S.Row className="botoes">
                 <Botao
                   type="button"
                   title="Gerar NC Parceiro"
@@ -379,7 +379,7 @@ const FormSinistro = () => {
                     navigate('/SiniSeguro', { state: { sinistro: formData } })
                   }
                 >
-                  Gerar Seguradora
+                  Gerar Proc. Seguradora
                 </Botao>
               </S.Row>
             </Ss.DivCamposResponsabilidade>
