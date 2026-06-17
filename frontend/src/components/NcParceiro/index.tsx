@@ -9,14 +9,17 @@ import * as S from '../../styles'
 
 // Componentes
 import Botao from '../Button'
-import { BuscarSinistroModal } from '../BuscarSinistroModal'
+import voltarIcon from '../../assets/assets/icons8-esquerda-50.png'
+import atualizarIcon from '../../assets/assets/icons8-save-50.png'
+import imprimirIcon from '../../assets/assets/icons8-imprimir-50.png'
+import excluirIcon from '../../assets/assets/icons8-lixo-50.png'
+import pesquisarIcon from '../../assets/assets/icons8-search-50.png'
 
 // Serviços
 import {
   cadastrarSinistro,
   atualizarSinistro,
   excluirSinistro,
-  buscarSinistroParceiroPorNF,
   baixarCartaSinistro
 } from '../../services/sinistroParceiroService'
 
@@ -33,7 +36,8 @@ const NcParceiros = () => {
     sacado: '',
     cnpjSacado: '',
     envioControladoria: '',
-    nFatura: ''
+    nFatura: '',
+    sinistroOrigemId: null as number | null
   })
 
   // Para armazenar o ID do sinistro (para atualizar/excluir)
@@ -128,7 +132,8 @@ const NcParceiros = () => {
       sacado: '',
       cnpjSacado: '',
       envioControladoria: '',
-      nFatura: ''
+      nFatura: '',
+      sinistroOrigemId: null
     })
     setSinistroId(null)
   }
@@ -145,7 +150,8 @@ const NcParceiros = () => {
       sacado: '',
       cnpjSacado: '',
       envioControladoria: '',
-      nFatura: ''
+      nFatura: '',
+      sinistroOrigemId: null
     })
   }
 
@@ -170,7 +176,9 @@ const NcParceiros = () => {
     return {
       ...data,
       sinistroOrigemId: data.sinistroOrigemId ?? null,
-      cnpjSacado: data.cnpjSacado ? String(data.cnpjSacado).replace(/\D/g, '') : '',
+      cnpjSacado: data.cnpjSacado
+        ? String(data.cnpjSacado).replace(/\D/g, '')
+        : '',
       manifesto: data.manifesto ? Number(data.manifesto) : null,
       valorSinistro: data.valorSinistro ? Number(data.valorSinistro) : null,
       envioControladoria: data.envioControladoria || null,
@@ -202,164 +210,162 @@ const NcParceiros = () => {
 
   return (
     <div>
-      {/* {modalAberto && (
-        <BuscarSinistroModal
-          fechar={() => setModalAberto(false)}
-          preencherFormulario={preencherFormulario}
-          service={buscarSinistroParceiroPorNF} // <-- injeta a função do seu service parceiro
-        />
-      )} */}
       <form onSubmit={handleSubmit}>
         <S.CampoForm>
           <div>
-            <S.Title>Cadastro de NC para Parceiro</S.Title>
-            <S.Row>
-              <S.TextLabel htmlFor="id">NC Parceiro</S.TextLabel>
-              <input
-                type="number"
-                name="id"
-                id="id"
-                value={formData.id}
-                onChange={(e) => handleInputChange('id', e.target.value)}
-              />
-            </S.Row>
-            <S.Row>
-              <S.TextLabel htmlFor="dataOcorrencia">
-                Data da ocorrência
-              </S.TextLabel>
-              <input
-                type="date"
-                name="dataOcorrencia"
-                id="dataOcorrencia"
-                value={formData.dataOcorrencia || ''}
-                onChange={(e) =>
-                  handleInputChange('dataOcorrencia', e.target.value)
-                }
-              />
-            </S.Row>
-            <S.Row>
-              <S.TextLabel htmlFor="notaFiscal">Nota Fiscal</S.TextLabel>
-              <input
-                type="number"
-                name="notaFiscal"
-                id="notaFiscal"
-                value={formData.notaFiscal || ''}
-                onChange={(e) =>
-                  handleInputChange('notaFiscal', e.target.value)
-                }
-              />
-            </S.Row>
+            <S.Destaque>
+              <S.Title>NC para Parceiro</S.Title>
+              <S.Row>
+                <S.TextLabel htmlFor="id">NC Parceiro</S.TextLabel>
+                <input
+                  type="number"
+                  name="id"
+                  id="id"
+                  value={formData.id}
+                  onChange={(e) => handleInputChange('id', e.target.value)}
+                />
+              </S.Row>
+            </S.Destaque>
+            <S.Linha />
+            <S.DivCampos>
+              <S.Row>
+                <S.TextLabel htmlFor="dataOcorrencia">
+                  Data da ocorrência
+                </S.TextLabel>
+                <input
+                  type="date"
+                  name="dataOcorrencia"
+                  id="dataOcorrencia"
+                  value={formData.dataOcorrencia || ''}
+                  onChange={(e) =>
+                    handleInputChange('dataOcorrencia', e.target.value)
+                  }
+                />
+              </S.Row>
+              <S.Row>
+                <S.TextLabel htmlFor="notaFiscal">Nota Fiscal</S.TextLabel>
+                <input
+                  type="number"
+                  name="notaFiscal"
+                  id="notaFiscal"
+                  value={formData.notaFiscal || ''}
+                  onChange={(e) =>
+                    handleInputChange('notaFiscal', e.target.value)
+                  }
+                />
+              </S.Row>
 
-            <S.Row>
-              <S.TextLabel htmlFor="nomeCliente">Nome do cliente</S.TextLabel>
-              <input
-                type="text"
-                name="nomeCliente"
-                id="nomeCliente"
-                value={formData.nomeCliente || ''}
-                onChange={(e) =>
-                  handleInputChange('nomeCliente', e.target.value)
-                }
-              />
-            </S.Row>
+              <S.Row>
+                <S.TextLabel htmlFor="nomeCliente">Nome do cliente</S.TextLabel>
+                <input
+                  type="text"
+                  name="nomeCliente"
+                  id="nomeCliente"
+                  value={formData.nomeCliente || ''}
+                  onChange={(e) =>
+                    handleInputChange('nomeCliente', e.target.value)
+                  }
+                />
+              </S.Row>
 
-            <S.Row>
-              <S.TextLabel htmlFor="motivo">Motivo</S.TextLabel>
-              <select
-                name="motivo"
-                id="motivo"
-                value={formData.motivo || ''}
-                onChange={(e) => handleInputChange('motivo', e.target.value)}
-              >
-                <option value="Avaria">Avaria</option>
-                <option value="Roubo">Roubo</option>
-                <option value="Extravio/Falta">Extravio/Falta</option>
-                <option value="Acidente">Acidente</option>
-                <option value="ViolacaoLacre">Violação de lacre</option>
-                <option value="QuebraProcedimento">
-                  Quebra de procedimento
-                </option>
-                <option value="PercaTemperatura">Perda de temperatura</option>
-              </select>
-            </S.Row>
+              <S.Row>
+                <S.TextLabel htmlFor="motivo">Motivo</S.TextLabel>
+                <select
+                  name="motivo"
+                  id="motivo"
+                  value={formData.motivo || ''}
+                  onChange={(e) => handleInputChange('motivo', e.target.value)}
+                >
+                  <option value="Avaria">Avaria</option>
+                  <option value="Roubo">Roubo</option>
+                  <option value="Extravio/Falta">Extravio/Falta</option>
+                  <option value="Acidente">Acidente</option>
+                  <option value="ViolacaoLacre">Violação de lacre</option>
+                  <option value="QuebraProcedimento">
+                    Quebra de procedimento
+                  </option>
+                  <option value="PercaTemperatura">Perda de temperatura</option>
+                </select>
+              </S.Row>
 
-            <S.Row>
-              <S.TextLabel htmlFor="valorSinistro">
-                Valor do sinistro
-              </S.TextLabel>
-              <NumericFormat
-                id="valorSinistro"
-                name="valorSinistro"
-                value={formData.valorSinistro}
-                thousandSeparator="."
-                decimalSeparator=","
-                prefix="R$ "
-                decimalScale={2}
-                fixedDecimalScale
-                allowNegative={false}
-                onValueChange={(values) => {
-                  const { floatValue } = values
-                  setFormData((prev) => ({
-                    ...prev,
-                    valorSinistro: floatValue ?? null
-                  }))
-                }}
-                placeholder="R$ 0,00"
-              />
-            </S.Row>
-
+              <S.Row>
+                <S.TextLabel htmlFor="valorSinistro">
+                  Valor do sinistro
+                </S.TextLabel>
+                <NumericFormat
+                  id="valorSinistro"
+                  name="valorSinistro"
+                  value={formData.valorSinistro}
+                  thousandSeparator="."
+                  decimalSeparator=","
+                  prefix="R$ "
+                  decimalScale={2}
+                  fixedDecimalScale
+                  allowNegative={false}
+                  onValueChange={(values) => {
+                    const { floatValue } = values
+                    setFormData((prev) => ({
+                      ...prev,
+                      valorSinistro: floatValue ?? null
+                    }))
+                  }}
+                  placeholder="R$ 0,00"
+                />
+              </S.Row>
+            </S.DivCampos>
             <S.TitleSecundario>Empresa do grupo</S.TitleSecundario>
+            <S.Linha />
+            <S.DivCampos>
+              <S.Row>
+                <S.TextLabel htmlFor="sacador">Sacador</S.TextLabel>
+                <select
+                  name="sacador"
+                  id="sacador"
+                  value={formData.sacador || ''}
+                  onChange={(e) => handleInputChange('sacador', e.target.value)}
+                >
+                  <option value="Empresa 1">Empresa 1</option>
+                  <option value="Empresa 2">Empresa 2</option>
+                  <option value="Empresa 3">Empresa 3</option>
+                </select>
+              </S.Row>
 
-            <S.Row>
-              <S.TextLabel htmlFor="sacador">Sacador</S.TextLabel>
-              <select
-                name="sacador"
-                id="sacador"
-                value={formData.sacador || ''}
-                onChange={(e) => handleInputChange('sacador', e.target.value)}
-              >
-                <option value="Empresa 1">Empresa 1</option>
-                <option value="Empresa 2">Empresa 2</option>
-                <option value="Empresa 3">Empresa 3</option>
-              </select>
-            </S.Row>
+              <S.Row>
+                <S.TextLabel htmlFor="sacado">Sacado</S.TextLabel>
+                <input
+                  type="text"
+                  name="sacado"
+                  id="sacado"
+                  value={formData.sacado || ''}
+                  onChange={(e) => handleInputChange('sacado', e.target.value)}
+                />
+              </S.Row>
 
-            <S.Row>
-              <S.TextLabel htmlFor="sacado">Sacado</S.TextLabel>
-              <input
-                type="text"
-                name="sacado"
-                id="sacado"
-                value={formData.sacado || ''}
-                onChange={(e) => handleInputChange('sacado', e.target.value)}
-              />
-            </S.Row>
-
-            <S.Row>
-              <S.TextLabel htmlFor="cnpjSacado">CNPJ Sacado</S.TextLabel>
-              <InputMask
-                mask="99.999.999/9999-99"
-                value={formData.cnpjSacado || ''}
-                onChange={(e) =>
-                  handleInputChange(
-                    'cnpjSacado',
-                    e.target.value.replace(/\D/g, '')
-                  )
-                }
-              >
-                {(inputProps: any) => (
-                  <input
-                    {...inputProps}
-                    type="text"
-                    name="cnpjSacado"
-                    id="cnpjSacado"
-                  />
-                )}
-              </InputMask>
-            </S.Row>
-
+              <S.Row>
+                <S.TextLabel htmlFor="cnpjSacado">CNPJ Sacado</S.TextLabel>
+                <InputMask
+                  mask="99.999.999/9999-99"
+                  value={formData.cnpjSacado || ''}
+                  onChange={(e) =>
+                    handleInputChange(
+                      'cnpjSacado',
+                      e.target.value.replace(/\D/g, '')
+                    )
+                  }
+                >
+                  {(inputProps: any) => (
+                    <input
+                      {...inputProps}
+                      type="text"
+                      name="cnpjSacado"
+                      id="cnpjSacado"
+                    />
+                  )}
+                </InputMask>
+              </S.Row>
+            </S.DivCampos>
             <S.TitleSecundario>Finalização</S.TitleSecundario>
-
+            <S.Linha />
             <S.Row className="Finalizacao">
               <S.TextLabel htmlFor="envioControladoria">
                 Envio para a controladoria
@@ -387,25 +393,20 @@ const NcParceiros = () => {
             </S.Row>
 
             <S.CampoButtons>
-              <Botao
-                type="button"
-                title="Adicionar novo sinistro"
-                onClick={handleNewSinistro}
-              >
-                Adicionar novo sinistro
-              </Botao>
-
-              <Botao type="submit" title="Salvar">
-                Salvar
-              </Botao>
-
               {formData.id && (
                 <Botao
                   type="button"
                   onClick={handleAtualizarSinistro}
                   title={'Atualizar Sinistro'}
                 >
-                  Atualizar Sinistro
+                  <>
+                    <img
+                      src={atualizarIcon}
+                      alt="Atualizar"
+                      style={{ width: 18, marginRight: 6 }}
+                    />
+                    Atualizar
+                  </>
                 </Botao>
               )}
 
@@ -414,7 +415,14 @@ const NcParceiros = () => {
                 title="Buscar"
                 onClick={() => setModalAberto(true)}
               >
-                Buscar
+                <>
+                  <img
+                    src={pesquisarIcon}
+                    alt="Buscar"
+                    style={{ width: 18, marginRight: 6 }}
+                  />
+                  Buscar
+                </>
               </Botao>
 
               <Botao
@@ -422,7 +430,14 @@ const NcParceiros = () => {
                 title="Gerar NC Parceiro"
                 onClick={handleDownloadCarta}
               >
-                Gerar NC Parceiro
+                <>
+                  <img
+                    src={imprimirIcon}
+                    alt="Imprimir"
+                    style={{ width: 18, marginRight: 6 }}
+                  />
+                  Gerar NC Parceiro
+                </>
               </Botao>
               <Botao
                 type="button"
@@ -430,7 +445,14 @@ const NcParceiros = () => {
                 onClick={handleExcluir}
                 className="botaoFechar"
               >
-                Excluir
+                <>
+                  <img
+                    src={excluirIcon}
+                    alt="Excluir"
+                    style={{ width: 18, marginRight: 6 }}
+                  />
+                  Excluir
+                </>
               </Botao>
               <Botao
                 type="link"
@@ -438,7 +460,14 @@ const NcParceiros = () => {
                 to={`/`}
                 className="botaoFechar"
               >
-                Fechar
+                <>
+                  <img
+                    src={voltarIcon}
+                    alt="Voltar"
+                    style={{ width: 18, marginRight: 6 }}
+                  />
+                  Voltar
+                </>
               </Botao>
             </S.CampoButtons>
           </div>

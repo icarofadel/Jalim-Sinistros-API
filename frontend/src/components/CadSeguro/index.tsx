@@ -97,6 +97,7 @@ const Seguro = () => {
 
     return {
       ...data,
+      sinistroOrigemId: data.sinistroOrigemId ?? null,
       segurado: seguradoSelecionado?.nome || '',
       cpf: data.cpf ? Number(data.cpf.replace(/\D/g, '')) : null,
       manifesto: data.manifesto ? Number(data.manifesto) : null,
@@ -129,13 +130,24 @@ const Seguro = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
+      // Validações básicas antes de enviar
+      if (!formData.notaFiscal) {
+        alert('Informe a Nota Fiscal antes de gerar o sinistro seguradora.')
+        return
+      }
+      if (!formData.nomeCliente) {
+        alert('Informe o nome do cliente antes de gerar o sinistro seguradora.')
+        return
+      }
+
       const dadosTratados = prepararDadosParaEnvio(formData)
-      console.log('Dados tratados para envio:', dadosTratados) // <-- aqui!
+      console.log('Dados tratados para envio:', dadosTratados)
       await cadastrarSinistro(dadosTratados)
       alert('Sinistro cadastrado com sucesso!')
       handleNewSinistro()
     } catch (error) {
       alert('Erro ao cadastrar sinistro')
+      console.error(error)
     }
   }
 
@@ -184,7 +196,10 @@ const Seguro = () => {
     setSelectedSegurado(idSegurado ?? '')
     setFilterednApolices(idSegurado ? nApolices[idSegurado] : [])
 
+    const idOrigem = dados.id
+
     setFormData({
+      id: idOrigem,
       ...formData,
       procSeguradora: dados.procSeguradora || '',
       segurado: idSegurado ?? '',
@@ -213,7 +228,8 @@ const Seguro = () => {
       placa: dados.placa || '',
       manifesto: dados.manifesto || '',
       local: dados.local || '',
-      status: dados.status || ''
+      status: dados.status || '',
+      sinistroOrigemId: idOrigem
     })
   }
 

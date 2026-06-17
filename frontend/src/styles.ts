@@ -102,3 +102,16 @@ export const CampoButtons = styled.div`
   }
   }
 `
+
+export const Destaque = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
+export const DivCampos = styled.div`
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+
+  div {
+    display: grid;
+  }
+`

@@ -233,7 +233,7 @@ const FormSinistro = () => {
 
         <S.CampoForm>
           <div>
-            <Ss.Destaque>
+            <S.Destaque>
               <S.Title>Informação do sinistro</S.Title>
               <S.Row>
                 <S.TextLabel htmlFor="idSinistro">ID do Sinistro</S.TextLabel>
@@ -247,9 +247,9 @@ const FormSinistro = () => {
                   }}
                 />
               </S.Row>
-            </Ss.Destaque>
+            </S.Destaque>
             <S.Linha />
-            <Ss.DivCampos>
+            <S.DivCampos>
               <S.Row>
                 <S.TextLabel htmlFor="DataOcorrencia">
                   Data da Ocorrência
@@ -332,7 +332,7 @@ const FormSinistro = () => {
                   placeholder="R$ 0,00"
                 />
               </S.Row>
-            </Ss.DivCampos>
+            </S.DivCampos>
             <S.TitleSecundario>Responsabilidade</S.TitleSecundario>
             <S.Linha />
             <Ss.DivCamposResponsabilidade>
@@ -432,7 +432,7 @@ const FormSinistro = () => {
               <div>
                 {formData.ciaAerea && (
                   <>
-                    <Ss.DivCampos>
+                    <S.DivCampos>
                       <S.Row>
                         <S.TextLabel htmlFor="CiaArea">
                           Nome Cia. aérea
@@ -453,12 +453,12 @@ const FormSinistro = () => {
                           onChange={handleInputChange}
                         />
                       </S.Row>
-                    </Ss.DivCampos>
+                    </S.DivCampos>
                   </>
                 )}
                 {formData.motorista && (
                   <>
-                    <Ss.DivCampos>
+                    <S.DivCampos>
                       <S.Row>
                         <S.TextLabel htmlFor="Motorista">Motorista</S.TextLabel>
                         <input
@@ -512,7 +512,7 @@ const FormSinistro = () => {
                           onChange={handleInputChange}
                         />
                       </S.Row>
-                    </Ss.DivCampos>
+                    </S.DivCampos>
                   </>
                 )}
               </div>
@@ -536,7 +536,7 @@ const FormSinistro = () => {
                   }
                 />
               </S.Row>
-              <Ss.DivCampos>
+              <S.DivCampos>
                 <S.Row>
                   <S.TextLabel htmlFor="DataEntrega">
                     Data da entrega
@@ -548,7 +548,7 @@ const FormSinistro = () => {
                     onChange={handleInputChange}
                   />
                 </S.Row>
-              </Ss.DivCampos>
+              </S.DivCampos>
             </div>{' '}
             <S.CampoButtons>
               {formData.id && (
